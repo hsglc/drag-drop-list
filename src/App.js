@@ -9,10 +9,43 @@ import Column from "./components/Column/Column";
 function App() {
   const [items, setItems] = useState(list);
 
-  const onDragEnd = (result) => {};
+  const DragEndHandler = (result) => {
+    const { destination, source, draggableId } = result;
+
+    if (!destination) {
+      return;
+    }
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+    const column = items.columns[source.droppableId];
+
+    const newTaskIds = Array.from(column.taskIds);
+
+    newTaskIds.splice(source.index, 1);
+    newTaskIds.splice(destination.index, 0, draggableId);
+
+    const newColumn = {
+      ...column,
+      taskIds: newTaskIds,
+    };
+
+    const newItems = {
+      ...items,
+      columns: {
+        ...items.columns,
+        [newColumn.id]: newColumn,
+      },
+    };
+
+    setItems(newItems);
+  };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={DragEndHandler}>
       {items.columnOrder.map((columnId) => {
         const column = items.columns[columnId];
         console.log(column);
