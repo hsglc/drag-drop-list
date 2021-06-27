@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import list from "./constants/list-items";
+
+import { useState } from "react";
+
+import Column from "./components/Column/Column";
+
+
 
 function App() {
+  const [items, setItems] = useState(list);
+
+  console.log(items);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {items.columnOrder.map((columnId) => {
+        const column = items.columns[columnId];
+        console.log(column);
+        const tasks = column.taskIds.map((taskId) => items.tasks[taskId]);
+
+        return <Column key={column.id} column={column} tasks={tasks} />;
+      })}
+
+      
     </div>
   );
 }
