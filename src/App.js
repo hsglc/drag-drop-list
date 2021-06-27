@@ -2,16 +2,17 @@ import list from "./constants/list-items";
 
 import { useState } from "react";
 
+import { DragDropContext } from "react-beautiful-dnd";
+
 import Column from "./components/Column/Column";
-
-
 
 function App() {
   const [items, setItems] = useState(list);
 
-  console.log(items);
+  const onDragEnd = (result) => {};
+
   return (
-    <div>
+    <DragDropContext onDragEnd={onDragEnd}>
       {items.columnOrder.map((columnId) => {
         const column = items.columns[columnId];
         console.log(column);
@@ -19,9 +20,7 @@ function App() {
 
         return <Column key={column.id} column={column} tasks={tasks} />;
       })}
-
-      
-    </div>
+    </DragDropContext>
   );
 }
 
