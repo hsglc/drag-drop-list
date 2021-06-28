@@ -65,10 +65,10 @@ function App() {
         const tasks = column.taskIds.map((taskId) => items.tasks[taskId]);
 
         return (
-          <div className="flex p-5" key={column.id}>
+          <main className="flex  p-10" key={column.id}>
             <Column key={column.id} column={column} tasks={tasks} />
             <Screen orderedItems={orderedItems} />
-          </div>
+          </main>
         );
       })}
     </DragDropContext>

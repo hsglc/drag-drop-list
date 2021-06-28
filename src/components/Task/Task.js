@@ -8,7 +8,7 @@ function Task({ task, index }) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          className="rounded-lg text-base mt-3 border-2 bg-purple-700 text-white hover:bg-white hover:text-purple-600 py-3"
+          className="rounded-lg text-sm sm:text-xl mt-3 border-2 bg-purple-700 text-white hover:bg-white hover:text-purple-600 hover:border-purple-700 px-2"
         >
           {task.content}
         </div>
