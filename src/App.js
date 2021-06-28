@@ -6,6 +6,8 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 import Column from "./components/Column/Column";
 
+import Screen from "./components/Screen/Screen";
+
 function App() {
   const [items, setItems] = useState(list);
 
@@ -47,7 +49,7 @@ function App() {
     };
 
     setItems(newItems);
-    console.log(items);
+    
   };
 
   useEffect(() => {
@@ -63,9 +65,9 @@ function App() {
         const tasks = column.taskIds.map((taskId) => items.tasks[taskId]);
 
         return (
-          <div className="flex">
+          <div className="flex p-5" key={column.id}>
             <Column key={column.id} column={column} tasks={tasks} />
-            <div>{orderedItems}</div>
+            <Screen orderedItems={orderedItems} />
           </div>
         );
       })}
